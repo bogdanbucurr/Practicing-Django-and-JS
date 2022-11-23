@@ -14,10 +14,10 @@ def store(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
     products = Product.objects.all()
-    context = {'products': products, 'cartItems':cartItems}
+    context = {'products': products, 'cartItems': cartItems, 'items': items, 'shipping': False}
     return render(request, 'store/store.html', context)
 
 
@@ -32,7 +32,7 @@ def cart(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems':cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/cart.html', context)
 
 
@@ -75,3 +75,7 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+def processOrder(request):
+    print('Data:', request.body)
+    return JsonResponse('Payment complete!', safe=False)

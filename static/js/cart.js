@@ -4,7 +4,7 @@ for (let i = 0; i < updateBtns.length; i++) {
     updateBtns[i].addEventListener('click', function () {
         let productId = this.dataset.product
         let action = this.dataset.action
-        console.log('prductId:', productId, 'action:', action)
+        console.log('productId:', productId, 'action:', action)
 
         console.log('USER:', user)
         if (user === 'AnonymousUser') {
@@ -18,7 +18,7 @@ for (let i = 0; i < updateBtns.length; i++) {
 function updateUserOrder(productId, action) {
     console.log('User is logged in, sending data..')
 
-    const url = '/update-item/'
+    let url = '/update-item/'
 
     fetch(url, {
         method: 'POST',
